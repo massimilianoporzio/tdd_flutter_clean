@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tdd_tutorial/src/features/authentication/data/models/user_model.dart';
@@ -80,6 +79,53 @@ void main() {
       final result = tModelFixture.toJson();
       expect(result, isA<String>()); //che sia una String
       expect(result, equals(tJson));
+    });
+  });
+
+  group("copyWith", () {
+    test("should return the correct name", () {
+      //Arrange
+      //act
+      final result = tModel.copyWith(name: "Paul");
+      //assert
+      expect(result, isA<UserModel>());
+      expect(result.name, equals("Paul"));
+      expect(result.id, equals(tModel.id));
+      expect(result.avatar, equals(tModel.avatar));
+      expect(result.createdAt, equals(tModel.createdAt));
+    });
+    test("should return the correct id", () {
+      //Arrange
+      //act
+      final result = tModel.copyWith(id: "111");
+      //assert
+      expect(result, isA<UserModel>());
+      expect(result.name, equals(tModel.name));
+      expect(result.id, equals("111"));
+      expect(result.avatar, equals(tModel.avatar));
+      expect(result.createdAt, equals(tModel.createdAt));
+    });
+    test("should return the correct avatar", () {
+      //Arrange
+      //act
+      final result = tModel.copyWith(avatar: "AVATAR");
+      //assert
+      expect(result, isA<UserModel>());
+      expect(result.name, equals(tModel.name));
+      expect(result.id, equals(tModel.id));
+      expect(result.avatar, equals("AVATAR"));
+      expect(result.createdAt, equals(tModel.createdAt));
+    });
+    test("should return the correct createdAt", () {
+      //Arrange
+      //act
+      final result = tModel.copyWith(createdAt: "NOW");
+      //assert
+      expect(result, isA<UserModel>());
+      expect(result.name, equals(tModel.createdAt));
+      expect(result.id, equals(tModel.id));
+      expect(result.avatar, equals(tModel.avatar));
+      expect(result.createdAt, equals("NOW"));
     });
   });
 }
